@@ -28,15 +28,14 @@ describe('montarFicha', () => {
 
 
         //Assert
-        console.log(result)
-        // expect(result).toEqual({
-        //     titulo: '#25 PIKACHU',
-        //     tipoPrincipal: 'water',
-        //     grande: false
-        // })
+        expect(result).toEqual({
+            titulo: '#25 PIKACHU',
+            tipoPrincipal: 'water',
+            grande: false
+        })
     })
 
-    it.skip('deve montar ficha do pokemon sem tipo', async () => {
+    it('deve montar ficha do pokemon sem tipo', async () => {
         // Arrange
 
        buscarPokemonMock.mockResolvedValue({
@@ -53,7 +52,6 @@ describe('montarFicha', () => {
 
 
         //Assert
-        console.log(result)
         expect(result).toEqual({
             titulo: '#1 BULBASAUR',
             tipoPrincipal: 'desconhecido',

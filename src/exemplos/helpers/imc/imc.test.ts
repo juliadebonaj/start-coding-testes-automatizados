@@ -1,6 +1,6 @@
 import { calcularIMC, classificarIMC } from "./imc"
 
-describe.skip('imc', () => {
+describe('imc', () => {
     describe('calcularIMC', () => {
         it('calcular imc', () => {
             //arrange
@@ -58,11 +58,23 @@ describe.skip('imc', () => {
 
             //act
             const result = classificarIMC(imc)
-           
-            
+
+
             //assert
             expect(result).toBe('Sobrepeso')
         })
+
+        // ===== Caso extra =====
+        it('should return "Obesidade" if imc is 30 or above', () => {
+            //arrange
+            const imc = 32
+
+            //act
+            const result = classificarIMC(imc)
+
+            //assert
+            expect(result).toBe('Obesidade')
+        })
     })
-    
+
 })

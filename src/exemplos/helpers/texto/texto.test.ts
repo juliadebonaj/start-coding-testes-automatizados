@@ -59,6 +59,18 @@ describe('function -> capitalize', () => {
         //Assert
         expect(result).toBe('Deus é amor')
     })
+
+    // ===== Caso extra =====
+    it('deve retornar string vazia quando o texto é vazio', () => {
+        //Arrange
+        const palavra = ""
+
+        //Act
+        const result = capitalize(palavra);
+
+        //Assert
+        expect(result).toBe('')
+    })
 })
 
 describe('function -> isPalindromo', () => {
