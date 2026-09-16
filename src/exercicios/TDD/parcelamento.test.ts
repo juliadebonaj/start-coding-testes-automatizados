@@ -56,4 +56,26 @@ describe('calcularParcelamento', () => {
       expect(calcularParcelamento(100, 3)).toEqual({ valorParcela: 33.33, totalParcelas: 3 })
     })
   })
+
+  describe('validações', () => {
+    const ERRO_PARCELAS = 'Número de parcelas deve ser um inteiro entre 1 e 18'
+    const ERRO_VALOR = 'Valor da compra deve ser maior que zero'
+
+    it('lança erro quando o número de parcelas for menor que 1', () => {
+      expect(() => calcularParcelamento(1000, 0)).toThrow(ERRO_PARCELAS)
+    })
+
+    it('lança erro quando o número de parcelas for maior que 18', () => {
+      expect(() => calcularParcelamento(1000, 19)).toThrow(ERRO_PARCELAS)
+    })
+
+    it('lança erro quando o número de parcelas não for inteiro', () => {
+      expect(() => calcularParcelamento(1000, 2.5)).toThrow(ERRO_PARCELAS)
+    })
+
+    it('lança erro quando o valor da compra for zero ou negativo', () => {
+      expect(() => calcularParcelamento(0, 3)).toThrow(ERRO_VALOR)
+      expect(() => calcularParcelamento(-50, 3)).toThrow(ERRO_VALOR)
+    })
+  })
 })
