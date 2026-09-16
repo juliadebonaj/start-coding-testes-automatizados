@@ -2,6 +2,7 @@ export type ResultadoParcelamento = {
   valorParcela: number
   totalParcelas: number
   valorTotal: number
+  parcelas: number[]
 }
 
 export function calcularParcelamento(
@@ -16,10 +17,23 @@ export function calcularParcelamento(
     throw new Error('Número de parcelas deve ser um inteiro entre 1 e 18')
   }
 
-  const total = valorCompra * (1 + obterJuros(numeroParcelas))
+  const total = arredondar(valorCompra * (1 + obterJuros(numeroParcelas)))
   const valorParcela = arredondar(total / numeroParcelas)
+  const parcelas = distribuirParcelas(total, valorParcela, numeroParcelas)
 
-  return { valorParcela, totalParcelas: numeroParcelas, valorTotal: arredondar(total) }
+  return { valorParcela, totalParcelas: numeroParcelas, valorTotal: total, parcelas }
+}
+
+function distribuirParcelas(
+  total: number,
+  valorParcela: number,
+  numeroParcelas: number,
+): number[] {
+  const parcelas = Array<number>(numeroParcelas).fill(valorParcela)
+  const somaDemais = valorParcela * (numeroParcelas - 1)
+  parcelas[0] = arredondar(total - somaDemais)
+
+  return parcelas
 }
 
 function arredondar(valor: number): number {
