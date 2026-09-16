@@ -15,5 +15,6 @@ export function calcularParcelamento(
 
 function obterJuros(numeroParcelas: number): number {
   if (numeroParcelas >= 5 && numeroParcelas <= 8) return 0.05
+  if (numeroParcelas >= 9 && numeroParcelas <= 12) return 0.08
   return 0
 }
