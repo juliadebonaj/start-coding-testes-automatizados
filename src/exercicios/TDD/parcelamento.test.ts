@@ -87,4 +87,28 @@ describe('calcularParcelamento', () => {
       expect(calcularParcelamento(1000, 13).valorTotal).toBe(1100)
     })
   })
+
+  describe('extra: soma das parcelas fecha com o total', () => {
+    it('retorna a lista de parcelas que soma exatamente o total', () => {
+      const { parcelas } = calcularParcelamento(100, 3)
+      const soma = parcelas.reduce((a, b) => a + b, 0)
+
+      expect(parcelas).toEqual([33.34, 33.33, 33.33])
+      expect(Math.round(soma * 100) / 100).toBe(100)
+    })
+
+    it('ajusta a primeira parcela quando há sobra de arredondamento com juros', () => {
+      // 1000 em 13x -> total 1100, 84.62*13 = 1100.06, diferença -0.06 na 1a
+      const { parcelas, valorTotal } = calcularParcelamento(1000, 13)
+      const soma = Math.round(parcelas.reduce((a, b) => a + b, 0) * 100) / 100
+
+      expect(parcelas[0]).toBe(84.56)
+      expect(parcelas.slice(1).every((p) => p === 84.62)).toBe(true)
+      expect(soma).toBe(valorTotal)
+    })
+
+    it('mantém parcela única igual ao total', () => {
+      expect(calcularParcelamento(1000, 1).parcelas).toEqual([1000])
+    })
+  })
 })
