@@ -1,6 +1,7 @@
 export type ResultadoParcelamento = {
   valorParcela: number
   totalParcelas: number
+  valorTotal: number
 }
 
 export function calcularParcelamento(
@@ -18,7 +19,7 @@ export function calcularParcelamento(
   const total = valorCompra * (1 + obterJuros(numeroParcelas))
   const valorParcela = arredondar(total / numeroParcelas)
 
-  return { valorParcela, totalParcelas: numeroParcelas }
+  return { valorParcela, totalParcelas: numeroParcelas, valorTotal: arredondar(total) }
 }
 
 function arredondar(valor: number): number {
