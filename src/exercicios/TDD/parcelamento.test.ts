@@ -78,4 +78,13 @@ describe('calcularParcelamento', () => {
       expect(() => calcularParcelamento(-50, 3)).toThrow(ERRO_VALOR)
     })
   })
+
+  describe('extra: valorTotal', () => {
+    it('retorna o valor total da compra já com juros', () => {
+      expect(calcularParcelamento(1000, 1).valorTotal).toBe(1000)
+      expect(calcularParcelamento(1000, 5).valorTotal).toBe(1050)
+      expect(calcularParcelamento(1000, 9).valorTotal).toBe(1080)
+      expect(calcularParcelamento(1000, 13).valorTotal).toBe(1100)
+    })
+  })
 })
