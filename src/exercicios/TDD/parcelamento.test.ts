@@ -49,4 +49,11 @@ describe('calcularParcelamento', () => {
       },
     )
   })
+
+  describe('arredondamento', () => {
+    it('arredonda o valor da parcela para 2 casas decimais', () => {
+      // 100 / 3 = 33.333... -> 33.33
+      expect(calcularParcelamento(100, 3)).toEqual({ valorParcela: 33.33, totalParcelas: 3 })
+    })
+  })
 })
