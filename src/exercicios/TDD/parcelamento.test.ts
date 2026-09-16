@@ -14,4 +14,12 @@ describe('calcularParcelamento', () => {
       expect(resultado).toEqual({ valorParcela: 250, totalParcelas: 4 })
     })
   })
+
+  describe('com juros', () => {
+    it('aplica 5% sobre o total quando for de 5x a 8x', () => {
+      // 1000 + 5% = 1050
+      expect(calcularParcelamento(1000, 5)).toEqual({ valorParcela: 210, totalParcelas: 5 })
+      expect(calcularParcelamento(1000, 8)).toEqual({ valorParcela: 131.25, totalParcelas: 8 })
+    })
+  })
 })
