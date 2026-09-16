@@ -7,6 +7,14 @@ export function calcularParcelamento(
   valorCompra: number,
   numeroParcelas: number,
 ): ResultadoParcelamento {
+  if (valorCompra <= 0) {
+    throw new Error('Valor da compra deve ser maior que zero')
+  }
+
+  if (!Number.isInteger(numeroParcelas) || numeroParcelas < 1 || numeroParcelas > 18) {
+    throw new Error('Número de parcelas deve ser um inteiro entre 1 e 18')
+  }
+
   const total = valorCompra * (1 + obterJuros(numeroParcelas))
   const valorParcela = arredondar(total / numeroParcelas)
 
