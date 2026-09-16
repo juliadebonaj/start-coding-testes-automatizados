@@ -33,5 +33,20 @@ describe('calcularParcelamento', () => {
       expect(calcularParcelamento(1000, 13)).toEqual({ valorParcela: 84.62, totalParcelas: 13 })
       expect(calcularParcelamento(1000, 18)).toEqual({ valorParcela: 61.11, totalParcelas: 18 })
     })
+
+    it.each([
+      { parcelas: 4, totalComJuros: 1000 },
+      { parcelas: 5, totalComJuros: 1050 },
+      { parcelas: 8, totalComJuros: 1050 },
+      { parcelas: 9, totalComJuros: 1080 },
+      { parcelas: 12, totalComJuros: 1080 },
+      { parcelas: 13, totalComJuros: 1100 },
+    ])(
+      'aplica a faixa correta no limite de $parcelas x (total $totalComJuros)',
+      ({ parcelas, totalComJuros }) => {
+        const esperado = Math.round((totalComJuros / parcelas) * 100) / 100
+        expect(calcularParcelamento(1000, parcelas).valorParcela).toBe(esperado)
+      },
+    )
   })
 })
