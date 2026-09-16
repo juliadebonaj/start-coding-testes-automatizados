@@ -21,5 +21,11 @@ describe('calcularParcelamento', () => {
       expect(calcularParcelamento(1000, 5)).toEqual({ valorParcela: 210, totalParcelas: 5 })
       expect(calcularParcelamento(1000, 8)).toEqual({ valorParcela: 131.25, totalParcelas: 8 })
     })
+
+    it('aplica 8% sobre o total quando for de 9x a 12x', () => {
+      // 1000 + 8% = 1080
+      expect(calcularParcelamento(1000, 9)).toEqual({ valorParcela: 120, totalParcelas: 9 })
+      expect(calcularParcelamento(1000, 12)).toEqual({ valorParcela: 90, totalParcelas: 12 })
+    })
   })
 })
